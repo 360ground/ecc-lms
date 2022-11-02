@@ -1,6 +1,0 @@
-[submodule "ecc"]
-	path = ecc
-	url = https://github.com/surafelhabteG/ecc.git
-[submodule "ecc-backend"]
-	path = ecc-backend
-	url = https://github.com/surafelhabteG/ecc-backend.git
