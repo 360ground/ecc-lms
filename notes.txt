@@ -1,0 +1,32 @@
+3.125.158.58 public facing web app
+deploy both custom canvas app and offical app
+use google email service as smtp service
+    :- disable google smtp server security policy
+        allow thrid party applications
+
+How can you add plugins in canvas
+how to deploy the custom canvas apps
+first deploy locally deploy locally
+
+
+
+create a list to show the previous done certificates
+
+
+create custom payment report
+
+create repo for custom plugins (
+
+    certificate apps
+
+
+
+)
+
+1.Research should we create our own certificate generations plugin
+    :- student name
+    :- course name
+    :- date
+    :- logo 
+
+2.Configure email service on canvas lms to allow for forget password.
