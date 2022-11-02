@@ -1,0 +1,6 @@
+[submodule "ecc"]
+	path = ecc
+	url = ./ecc
+[submodule "ecc-backend"]
+	path = ecc-backend
+	url = ./ecc-backend
