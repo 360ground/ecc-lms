@@ -1,0 +1,495 @@
+<div class="container-fluid" style="margin-top: 66px !important;">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="card headerCard">
+              <div class="row">
+                <div class="col-sm-12 col-md-3 col-lg-3"></div>
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <h1 class="headerTitle">My Profile</h1>
+                    <p class="headerSubtitle">View and edit your personal information </p>
+                </div>
+                <div class="col-sm-12 col-md-3 col-lg-3"></div>
+              </div>  
+            </div>
+        </div>
+    </div>
+</div> 
+
+
+<div class="container" style="margin-top: 45px !important;">
+    <div class="row">
+        <div class="col-sm-12 col-md-2 col-lg-2"></div>
+    
+        <div class="col-sm-12 col-md-8 col-lg-8 mb-4">
+            <form [formGroup]="formGroup">
+                
+                    <div *ngIf="isIndividual" class="mb-4">
+                        <div class="card profileCard" >
+                            <h1 class="mb-4" class="cardTitle">Personal Details</h1>
+                            <p class="gray mb-4">This name will appear on your certificates.</p>
+                            <!-- <hr class="mb-4 mt-4" /> -->
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="individual" class="mb-4">
+                                        <label>First Name</label>
+                                        <input required class="form-control form-control-lg" formControlName="firstname" />
+                                        <p *ngIf="formSubmitted && getControls('individual.firstname').hasError('required')" class="error">
+                                            <small> * required</small>
+                                        </p>
+                                       
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="individual" class="mb-4">
+                                        <label>Last Name</label>
+                                        <input required class="form-control form-control-lg" formControlName="lastname" />
+                                        <p *ngIf="formSubmitted && getControls('individual.lastname').hasError('required')" class="error">
+                                            <small> * required</small>
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="individual" class="mb-4">
+                                        <label>Sex</label>
+                                        <select formControlName="sex" required class="form-control form-control-lg"
+                                            placeholder="--select --">
+                                            <option value="femal">
+                                                <small>Female</small>
+                                            </option>
+                                            <option value="male">
+                                                <small>Male</small>
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="individual" class="mb-4">
+                                        <label>Email address</label>
+                                        <input required type="email" class="form-control form-control-lg" formControlName="email" />
+                                        <p *ngIf="formSubmitted && getControls('individual.email').hasError('required')" class="error">
+                                            <small> * required</small>
+                                        </p>
+                                        <p *ngIf="formSubmitted && getControls('individual.email').hasError('email')" class="error">
+                                            <small> * invalid email</small>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="individual" class="mb-4">
+                                        <label>Phone Number</label>
+                    
+                                        <input required class="form-control form-control-lg" formControlName="phonenumber" />
+                                        <p *ngIf="formSubmitted && getControls('individual.phonenumber').hasError('required')" class="error">
+                                            <small> * required</small>
+                                        </p>
+                                        <p *ngIf="formSubmitted && getControls('individual.phonenumber').hasError('minlength')" class="error">
+                                            <small> * Must atleast 10 characters long </small>
+                                        </p>
+                                        <p *ngIf="formSubmitted && getControls('individual.phonenumber').hasError('maxlength')" class="error">
+                                            <small> * Can't exceed 10 characters</small>
+                                        </p>
+                                        <p *ngIf="formSubmitted && getControls('individual.phonenumber').hasError('validMobileNumberFormat')" class="error">
+                                            <small> * Invalid. mobile number must begin with 09 or 07 then **-**-**-**</small>
+                                        </p>
+                                        <p *ngIf="formSubmitted && getControls('individual.phonenumber').hasError('MobileNumberMustBeNumber')" class="error">
+                                            <small> * mobile number must be a number</small>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="individual" class="mb-4">
+                                        <label>Age Range</label>
+                                        <select required class="form-control form-control-lg" placeholder="--select --"
+                                            formControlName="ageRange">
+                                            <option value="1-15">18 - 25</option>
+                                            <option value="16-50">26 - 30</option>
+                                            <option value="50-200">31 - 40</option>
+                                            <option value=">200"> 40+</option>
+                                        </select>
+                                        <p *ngIf="formSubmitted && getControls('individual.ageRange').hasError('required')" class="error">
+                                            <small> * required</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card profileCard">
+                            <h1 class="mb-4" class="cardTitle">Work Details</h1>
+                            <p class="gray mb-4">This name will appear on your certificates.</p>
+                            <!-- <hr class="mb-4 mt-4" /> -->
+                            <div class="row">    
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="individual" class="mb-4">
+                                        <label>Organization Name</label>
+                    
+                                        <input required class="form-control form-control-lg" formControlName="organizationName" />
+                                        <p *ngIf="formSubmitted && getControls('individual.organizationName').hasError('required')" class="error">
+                                            <small> * required</small>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="individual" class="mb-4">
+                                        <label>Sector</label>
+                    
+                                        <input required class="form-control form-control-lg" formControlName="sector" />
+                                        <p *ngIf="formSubmitted && getControls('individual.sector').hasError('required')" class="error">
+                                            <small> * required</small>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="individual" class="mb-4">
+                                        <label>Current Position (Occupation)</label>
+                    
+                                        <input required class="form-control form-control-lg" formControlName="occupation" />
+                                        <p *ngIf="formSubmitted && getControls('individual.occupation').hasError('required')" class="error">
+                                            <small> * required</small>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="individual" class="mb-4">
+                                        <label>Year Of Exprience</label>
+                                        <input type="number" required class="form-control form-control-lg" formControlName="yearOfExperience" />
+                                        <p *ngIf="formSubmitted && getControls('individual.yearOfExperience').hasError('required')" class="error">
+                                            <small> * required</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+
+                        <div class="card profileCard">
+                            <h1 class="mb-4" class="cardTitle">Address Details</h1>
+                            <p class="gray mb-4">This name will appear on your certificates.</p>
+                            <!-- <hr class="mb-4 mt-4" /> -->
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="individual" class="mb-4">
+                                        <label>Country</label>
+                    
+                                        <input required class="form-control form-control-lg" formControlName="country" />
+                                        <p *ngIf="formSubmitted && getControls('individual.country').hasError('required')" class="error">
+                                            <small> * required</small>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="individual" class="mb-4">
+                                        <label>City</label>
+                    
+                                        <input required class="form-control form-control-lg" formControlName="city" />
+                                        <p *ngIf="formSubmitted && getControls('individual.city').hasError('required')" class="error">
+                                            <small> * required</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+
+                        <div class="card profileCard">
+                            <h1 class="mb-4" class="cardTitle">Education Details</h1>
+                            <p class="gray mb-4">This is your education record register in our system.</p>
+
+                            <div class="row">
+                                <div class="col-sm-12 col-md-8 col-lg-8"></div>
+                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                    <button class="btn btn-success mb-2 me-2" style="float: right;"
+                                     (click)="openModal(longContent)">
+                                        <i class="fa fa-plus mr-4" aria-hidden="true"></i> Add New
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12" *ngIf="!myEducation.length">
+                                    <div class="card" style="padding: 24px;">
+                                        <div class="empty-card">
+                                           <h4 class="empty-card-title">You have not added education.</h4>                                       
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6 col-lg-6"  *ngFor="let eduBack of myEducation; let i = index;" >
+                                    <div class="empty-card">
+                                        <h4 class="empty-card-title">{{ eduBack?.institutionName }}</h4>
+                                        <p class="empty-card-description">
+                                        {{ eduBack?.fieldOfStudy | titlecase }}  ({{ eduBack?.qualification }})
+                                        </p>
+                                        <p class="empty-card-description">
+                                            <b>({{ eduBack?.dateOfCompletion }})</b> 
+                                        </p>
+                                        
+                                        <p class="empty-card-button">
+                                            <button class="btn btn-outline-primary" (click)="editEducation(i)">
+                                                <i class="fa fa-pencil mr-4" aria-hidden="true"></i> Edit
+                                            </button>
+                                            <button class="btn btn-outline-danger" style="margin-right: 29px;" (click)="removeEducation(i)">
+                                                <i class="fa fa-trash" aria-hidden="true"></i> Remove
+                                            </button>
+                                        </p>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>  
+
+                        <ng-template #content let-modal>
+                            <div class="modal-header">
+                                <h4 class="modal-title">Add Education</h4>
+                                <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>One fine body&hellip;</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+                            </div>
+                        </ng-template>
+                        
+                        <ng-template #longContent let-modal>
+                            <div class="modal-header">
+                                <h4 class="modal-title">{{ isOnEdit ? 'Edit education' : 'Add Education' }}</h4>
+                                <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div formGroupName="education" class="mb-4">
+                                    <label>Institution Name</label>
+                                    <input class="form-control form-control-lg"  formControlName="institutionName" />
+                                </div>
+                                <div formGroupName="education" class="mb-4">
+                                    <label>Qualification</label>
+                                    <select required class="form-control form-control-lg" placeholder="--select --"
+                                        formControlName="qualification">
+                                        <option [value]="quali.value" *ngFor="let quali of qualification; let i = index">{{ quali.title | titlecase }}</option>
+                                    </select>
+                                </div>
+                                <div formGroupName="education" class="mb-4">
+                                    <label>Field of study</label>
+                                    <input class="form-control form-control-lg" formControlName="fieldOfStudy" />
+                                </div>
+                                <div formGroupName="education" class="mb-4">
+                                    <label>Date of Completion</label>
+                                    <input class="form-control form-control-lg"
+                                    formControlName="dateOfCompletion" />
+                                </div>
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" (click)="saveChanges()">
+                                    Save Changes
+                                </button>
+                            </div>
+                        </ng-template>
+
+                    </div>
+
+                    <div *ngIf="!isIndividual" class="mb-4">
+                        <div class="card profileCard">
+                            <h1 class="mb-4" class="cardTitle">Personal Details</h1>
+                            <p class="gray mb-4">This name will appear on your certificates.</p>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="company" class="mb-4">
+                                        <label>First Name</label>
+                                        <input required class="form-control form-control-lg" formControlName="firstname" />
+                                        <p *ngIf="formSubmitted && getControls('company.firstname').hasError('required')" class="error">
+                                            <small> * required</small>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">    
+                                    <div formGroupName="company" class="mb-4">
+                                        <label>Last Name</label>
+                                        <input required class="form-control form-control-lg" formControlName="lastname" />
+                                        <p *ngIf="formSubmitted && getControls('company.lastname').hasError('required')" class="error">
+                                            <small> * required</small>
+                                        </p>
+                                    </div>
+                                </div>  
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="company" class="mb-4">
+                                        <label>Sex</label>
+                                        <select formControlName="sex" required class="form-control form-control-lg"
+                                            placeholder="--select --">
+                                            <option value="femal">
+                                                <small>Female</small>
+                                            </option>
+                                            <option value="male">
+                                                <small>Male</small>
+                                            </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card profileCard">
+                            <h1 class="mb-4" class="cardTitle">Organization Details</h1>
+                            <p class="gray mb-4">This name will appear on your certificates.</p>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="company" class="mb-4">
+                                        <label>Organization Name</label>
+                                        <input required class="form-control form-control-lg" formControlName="organizationName" />
+                                        <p *ngIf="formSubmitted && getControls('company.organizationName').hasError('required')" class="error">
+                                            <small> * required</small>
+                                        </p>
+                                    </div>
+                                </div>    
+                                <!-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="company" class="mb-4">
+                                        <label>Representative FullName</label>
+                                        <input required class="form-control form-control-lg" formControlName="representativeFullName" />
+                                    </div>
+                                </div>   -->
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="company" class="mb-4">
+                                        <label>Representative Role</label>
+                                        <input required class="form-control form-control-lg" formControlName="representativeRole" />
+                                        <p *ngIf="formSubmitted && getControls('company.representativeRole').hasError('required')" class="error">
+                                            <small> * required</small>
+                                        </p>
+                                    </div>
+                                </div>  
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="company" class="mb-4">
+                                        <label>Contact Person Email address</label>
+                                        <input required class="form-control form-control-lg" formControlName="email" />
+                                        <p *ngIf="formSubmitted && getControls('company.email').hasError('required')" class="error">
+                                            <small> * required</small>
+                                        </p>
+                                        <p *ngIf="formSubmitted && getControls('company.email').hasError('email')" class="error">
+                                            <small> * invalid email</small>
+                                        </p>
+                                    </div>
+                                </div>   
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="company" class="mb-4">
+                                        <label>Contact Person Phone Number</label>
+                                        <input required class="form-control form-control-lg" formControlName="phonenumber" />
+                                        <p *ngIf="formSubmitted && getControls('company.phonenumber').hasError('required')" class="error">
+                                            <small> * required</small>
+                                        </p>
+                                        <p *ngIf="formSubmitted && getControls('company.phonenumber').hasError('minlength')" class="error">
+                                            <small> * Must atleast 10 characters long </small>
+                                        </p>
+                                        <p *ngIf="formSubmitted && getControls('company.phonenumber').hasError('maxlength')" class="error">
+                                            <small> * Can't exceed 10 characters</small>
+                                        </p>
+                                        <p *ngIf="formSubmitted && getControls('company.phonenumber').hasError('validMobileNumberFormat')" class="error">
+                                            <small> * Invalid. mobile number must begin with 09 or 07 then **-**-**-**</small>
+                                        </p>
+                                        <p *ngIf="formSubmitted && getControls('company.phonenumber').hasError('MobileNumberMustBeNumber')" class="error">
+                                            <small> * mobile number must be a number</small>
+                                        </p>
+                                    </div>
+                                </div>   
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="company" class="mb-4">
+                                        <label>Sector</label>
+                                        <input required class="form-control form-control-lg" formControlName="sector" />
+                                        <p *ngIf="formSubmitted && getControls('company.sector').hasError('required')" class="error">
+                                            <small> * required</small>
+                                        </p>
+                                    </div>
+                                </div>   
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <div formGroupName="company" class="mb-4">
+                                        <label>Number of Employee</label>
+                                        <select required class="form-control form-control-lg" placeholder="--select --"
+                                            formControlName="NoOfEmployee">
+                                            <option value="1-15">1 - 15</option>
+                                            <option value="16-50">16 - 50</option>
+                                            <option value="50-200">50 - 200</option>
+                                            <option value=">200"> +200</option>
+                                        </select>
+                                        <p *ngIf="formSubmitted && getControls('company.NoOfEmployee').hasError('required')" class="error">
+                                            <small> * required</small>
+                                        </p>
+                                    </div>
+                                </div>     
+                            </div>
+                        </div>
+                        <div class="card profileCard">
+                            <h1 class="mb-4" class="cardTitle">Membership Details</h1>
+                            <p class="gray mb-4">This name will appear on your certificates.</p>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div formGroupName="company" class="mb-4">
+                                        <mat-checkbox class="example-margin"
+                                        formControlName="isaMember"
+                                        color="primary"
+                                        (change)="isMemberCheck($event.checked)">
+                                        Are you a Member ?
+                                        </mat-checkbox>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div formGroupName="company" class="mb-4">
+                                        <label>Membership type</label>
+                                        <input class="form-control form-control-lg" formControlName="membershipType" />
+                                    </div>
+                                </div>  
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <div formGroupName="company" class="mb-4 row">
+                                        <div class="col-sm-12" [ngClass]="getControls('company.memberId').value ? 'col-md-11 col-lg-11' : 'col-md-12 col-lg-12'">
+                                            <label>If So, please attache the membership id here.</label>
+                                            <input type="file" class="form-control form-control-lg" (change)="onFileUpload($event)" 
+                                            accept="image/*" formControlName="memberId" />
+                                        </div>
+                                        <div class="col-sm-12 col-md-1 col-lg-1" *ngIf="getControls('company.memberId').value">
+                                            <label></label>
+                                            <span (click)="removeMemberId()" title="remove member id attachment">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <hr class="mb-4"/>
+                                    <p class="previousmemberIdLable">
+                                        Previously uploaded member Id
+                                    </p>
+                                    <!-- previous uploadded member id section -->
+                                    <div class="row" *ngIf="memberId">
+                                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                            <div class="memberIdCardContainer" (click)="openImage()">
+                                                <img [src]="memberId" style="width: 100% !important; height: 100% !important"/>
+                                            </div>
+                                            <hr class="mt-4 mb-4"/>
+                                            <button class="btn btn-danger btn-lg btn-block" style="width: 100% !important"
+                                            (click)="deleteMemberId()"    
+                                            >
+                                                Delete
+                                            </button>
+                                        </div>    
+                                    </div>
+
+                                </div>   
+                                
+                            </div>    
+                        </div> 
+                    </div>        
+                        
+                    <Button type="submit" class="btn btn-primary btn-lg btn-block" style="width: 100% !important;"  *ngIf="!disable"
+                        [disabled]="(isIndividual ? getControls('individual').invalid : getControls('company').invalid)"
+                        (click)="isIndividual ? Submit('individual') : Submit('company')"
+                        >
+                       <span>
+                        Save Changes
+                      </span> 
+                    </Button>
+                    <Button class="btn btn-primary btn-lg btn-block disabled" style="width: 100% !important;"  *ngIf="disable">
+                      <span>
+                        <i class='fa fa-spinner fa-spin fa-3x fa-fw' 
+                        style="margin-right: 10px !important; font-size: 24px !important;" aria-hidden="true"></i>
+                      </span>
+                    </Button>
+            </form> 
+        </div>
+    
+        <div class="col-sm-12 col-md-2 col-lg-2"></div>
+    </div>
+</div>
