@@ -1,0 +1,15 @@
+.row {
+    margin-top: 102px !important;
+}
+
+.error {
+    color: red !important;
+}
+
+.btn-block {
+    width: 100% !important;
+}
+
+.fa-spinner {
+    font-size: 32px !important;
+  }
