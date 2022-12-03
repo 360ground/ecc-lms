@@ -1,0 +1,203 @@
+    <div class="row top">
+        <div class="col-sm-12 col-md-2 col-lg-2"></div>
+        <div class="col-sm-12 col-md-8 col-lg-8">
+            <p style="margin-top: 53px !important;margin-bottom: -30px !important;" 
+                *ngFor="let message of failedAttemptsMessage">
+                <ngb-alert type="warning" [dismissible]="true" (closed)="closeMessage()">
+                    <strong>Attention !</strong> 
+                    {{ message }}
+                </ngb-alert>
+            </p>
+            <div class="card" *ngIf="!requestDetail">
+                <div class="card-body">
+                    <p>
+                        <span><h1 class="topHeader">Enrollment request's</h1></span>
+                    </p>
+                    <p><span><hr /></span></p>
+
+                        <div class="mb-4">
+                            <label class="mb-4">Filter requests by date</label>
+                            <p>
+                                <ejs-daterangepicker cssClass="e-outline" 
+                                placeholder="-- select date range to filter requests --"
+                                (change)="filterRequests($event)"></ejs-daterangepicker>
+                            </p>
+                            <p><span><hr /></span></p>
+
+                            <ul class="list-group">
+                                <li class="list-group-item lists" *ngFor="let request of requests; let i = index"
+                                 (click)="viewDetail(i,request)">
+                                    <div>
+                                        <p class="requestCourseName">{{ request.course_name | titlecase }}</p>
+                                        <p class="requestInstitutionName">{{ request?.institution_name }}</p>
+                                        <p class="courseFooter">
+                                            <span class="requestDate">request date : {{ request.createdAt | date }}</span>
+                                            <span class="requestStatus" [ngClass]="
+                                            request?.status == 'pending' ? 'pendingStatus' : 
+                                            request?.status == 'Approved' ? 'successStatus': 
+                                            request?.status == 'Enrolled' ? 'successStatus' : 'failedStatus'"
+    
+                                            >{{ request.status }}</span>
+                                        </p>
+                                    </div>  
+                                </li>
+                            </ul>
+                        </div> 
+                        <div *ngIf="!requests.length">
+                            <ul class="list-group">
+                                <li class="list-group-item lists" style="text-align: center !important;">
+                                    -- no request found --
+                                </li>
+                            </ul>
+                        </div> 
+                </div>
+            </div>
+            <!-- for request detail -->
+            <div class="card" *ngIf="requestDetail">
+                <div class="card-body">
+                    <p>
+                        <span>
+                            <Button class="btn btn-secondary" (click)="back()">
+                                <span class="mr-4">
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                </span>
+                                <span class="ml-4">
+                                    Back to list
+                                </span>
+                            </Button>
+                        </span>
+                    </p>
+                    <p>
+                        <span>
+                            <h1 class="topHeader">Request Detail</h1>
+                        </span>
+                    </p>    
+                    
+                    <p>
+                        <span><hr /></span>
+                    </p>
+                    <div class="mb-4">
+                        <div>
+                            <p class="requestDetailHeader">Institution name : <b>{{ requestDetail?.institution_name }}</b></p>
+                            <p class="requestDetailHeader">Course name : <b>{{ requestDetail.course_name | titlecase }}</b></p>
+                            <p class="requestDetailHeader">Request date: <b>{{ requestDetail.createdAt | date }}</b></p>
+                            <p class="requestDetailHeader">Status: <b>{{ requestDetail.status | uppercase }}</b></p>
+                            <p class="requestDetailHeader">Remark: </p>
+                            <div class="remarkBox mb-4">
+                                {{ requestDetail.remark ?? ' -- no specified remarks --' }}
+                            </div>
+                            <p class="requestDetailHeader">Attachments: </p>
+                            <p class="requestDetailHeader">
+                                <span>
+                                    <button type="button" class="btn btn-light" (click)="openAttachment('traineeList')">
+                                        view trainee's list
+                                    </button>
+                                </span>
+                                <span>
+                                    <button type="button" class="btn btn-light" (click)="openAttachment('bankSlip')">
+                                        view bankSlip
+                                    </button>
+                                </span>
+                            </p>
+
+                        </div>  
+                        <p>
+                            <span><hr /></span>
+                        </p>
+                        <p>
+                            <span>
+                                <h1>Trainee List</h1>
+                            </span>
+                        </p>    
+                        
+                        <div>
+                            <ul class="list-group">
+                                <li class="list-group-item" *ngFor="let student of requestDetail?.students; let i = index">
+                                    <div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-2 col-lg-2">
+                                                <img [src]="student?.avatar_url" style="width: 42px; height: 35px;border-radius: 50%;margin-right: 5px;" />
+                                            </div>
+                                            <div class="col-sm-12 col-md-7 col-lg-7" style="text-align: center !important;">
+                                                <span>
+                                                    {{ student?.name | titlecase }}
+                                                </span>
+                                                <br />
+                                                <span class="emailField">
+                                                    <small>({{ student?.email }})</small>
+                                                </span>
+                                            </div>
+                                         
+                                            <div class="col-sm-12 col-md-3 col-lg-3">
+                                                <span title={{student.message}} class="enrollmentStatus" [ngClass]="
+                                                student?.status == 'pending' ? 'pendingStatus' : 
+                                                student?.status == 'success' ? 'successStatus': 'failedStatus'">
+                                                    {{ student?.status }}
+                                                    <span *ngIf="student.isEnrolling">
+                                                        <i class='fa fa-spinner fa-spin fa-3x fa-fw' 
+                                                            style="margin-right: 10px !important; font-size: 17px !important; margin-top: 4px !important;" aria-hidden="true">
+                                                        </i>
+                                                    </span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </li>
+                            </ul>
+                        </div>
+                        <div style="margin-top: 43px !important">
+                            <p>
+                                <span *ngIf="requestDetail.status == 'Approved' && remainingTrainees.length">
+                                    <Button class="btn btn-primary btn-lg btn-block mr-4" (click)="enrollTrainee()" [disabled]="disable">
+                                        <span *ngIf="showEnrollSpinner">
+                                            <i class='fa fa-spinner fa-spin fa-3x fa-fw' 
+                                                style="margin-right: 10px !important; font-size: 18px !important;" aria-hidden="true">
+                                            </i>
+                                        </span>
+                                        <span>
+                                            Enroll Trainee's
+                                        </span>
+                                    </Button>
+                                </span>
+                                <span *ngIf="!remainingTrainees.length" style="border-radius: 0px !important;" 
+                                    class="btn btn-primary btn-lg btn-block disabled mr-4">
+                                    All trainee's are Enrolled
+                                </span>
+                                <span *ngIf="requestDetail.status == 'pending'">
+                                    <Button class="btn btn-success btn-lg btn-block mr-4" (click)="updateRequest('approve')"
+                                    [disabled]="disable"    
+                                    >
+                                    <span *ngIf="showApproveSpinner">
+                                        <i class='fa fa-spinner fa-spin fa-3x fa-fw' 
+                                            style="margin-right: 10px !important; font-size: 18px !important;" aria-hidden="true">
+                                        </i>
+                                    </span>
+                                    <span>
+                                        Approve
+                                    </span>
+                                    </Button>
+                                </span>
+                                <span *ngIf="requestDetail.status == 'pending'">
+                                    <Button class="btn btn-danger btn-lg btn-block" (click)="updateRequest('decline')"
+                                    [disabled]="disable"
+                                    >
+                                    <span *ngIf="showDeclineSpinner">
+                                        <i class='fa fa-spinner fa-spin fa-3x fa-fw' 
+                                            style="margin-right: 10px !important; font-size: 18px !important;" aria-hidden="true">
+                                        </i>
+                                    </span>
+
+                                    <span>
+                                        Decline
+                                    </span>
+                                    </Button>
+                                </span>
+                            </p>
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>        
+        <div class="col-sm-12 col-md-2 col-lg-2"></div>
+    </div>
+        
